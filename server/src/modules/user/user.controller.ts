@@ -1,10 +1,21 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import CreateUserDto from './dto/create-user.dto';
 
-@Controller('user')
+@Controller('users')
 export class UserController {
 
   @Get()
-  public getUser() {
-    return 'It is user';
+  public findAll() {
+    return 'It is users';
+  }
+
+  @Get(':id')
+  public findOne(@Param('id') id: string) {
+    return `User ${id}`;
+  }
+
+  @Post()
+  public createUser(@Body() createUserDto: CreateUserDto) {
+    return createUserDto;
   }
 }
